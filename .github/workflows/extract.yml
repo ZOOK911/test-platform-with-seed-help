@@ -1,0 +1,23 @@
+name: Extract project.zip
+on:
+  push:
+    paths:
+      - 'project.zip'
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+      - name: Unzip and commit
+        run: |
+          unzip -o project.zip -d .
+          rm project.zip
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Extract project.zip" || echo "No changes to commit"
+          git push origin HEAD:main
