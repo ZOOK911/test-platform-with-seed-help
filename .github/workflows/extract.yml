@@ -4,7 +4,7 @@ on:
     paths:
       - 'project.zip'
 
-  workflow_dispatch:
+      workflow_dispatch:
 jobs:
   extract:
     runs-on: ubuntu-latest
